@@ -21,6 +21,10 @@ $ `cd <projects-parent-directory> && git clone https://github.com/pascalallen/Vi
 
 $ `cp .env.example .env`
 
+### Unzip Database Initialization File
+
+$ `gzip -d db.sql.gz`
+
 ### Bring Up Environment
 
 $ `bin/up`
