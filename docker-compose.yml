@@ -1,0 +1,56 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: ./etc/fpm
+    container_name: virtualhealth-app
+    volumes:
+      - .:/var/www/app:cached
+    networks:
+      - virtualhealth
+
+  db:
+    build:
+      context: ./etc/mysql
+    container_name: virtualhealth-db
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - dbdata:/var/lib/mysql
+      - ./etc/mysql/my.cnf:/etc/mysql/my.cnf
+    networks:
+      - virtualhealth
+
+  nginx:
+    build:
+      context: ./etc/nginx
+    container_name: virtualhealth-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - .:/var/www/app:cached
+    networks:
+      - virtualhealth
+
+  worker:
+    build:
+      context: ./etc/worker
+    container_name: virtualhealth-worker
+    volumes:
+      - .:/var/www/app:cached
+    networks:
+      - virtualhealth
+
+networks:
+  virtualhealth:
+    driver: bridge
+
+volumes:
+  dbdata:
+    driver: local
