@@ -1,6 +1,6 @@
 FROM nginx:latest
 
-ENV VIRTUAL_HOST="localhost"
+ENV VIRTUAL_HOST="virtualhealth.test"
 
 COPY site.conf.template /etc/nginx/conf.d/site.conf.template
 

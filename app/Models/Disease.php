@@ -13,7 +13,7 @@ class Disease
      * Constructs Disease
      */
     public function __construct(
-        protected string $patientId,
+        protected int $patientId,
         protected string $internationClassificationOfDisease
     ) {
     }
@@ -21,7 +21,7 @@ class Disease
     /**
      * Retrieves the patient ID
      */
-    public function patientId(): string
+    public function patientId(): int
     {
         return $this->patientId;
     }

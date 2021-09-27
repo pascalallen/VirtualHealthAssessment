@@ -4,41 +4,58 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Illuminate\Support\Collection;
+
 /**
  * Class Patient
  */
 class Patient
 {
-    /** @var string */
-    protected $id;
-    /** @var string */
-    protected $name;
+    /**
+     * ID
+     */
+    protected int $id;
+
+    /**
+     * Name
+     */
+    protected string $name;
+
+    /**
+     * Medications
+     */
+    protected Collection $medications;
+
+    /**
+     * Diseases
+     */
+    protected Collection $diseases;
 
     /**
      * Constructs Patient
      *
      * @internal
      */
-    protected function __construct(string $id, string $name)
+    protected function __construct(int $id, string $name)
     {
         $this->id = $id;
         $this->name = $name;
+        $this->medications = collect();
+        $this->diseases = collect();
     }
 
     /**
      * Registers a patient
      */
-    public static function register(string $name): static
+    public static function register(int $id, string $name): static
     {
-        $id = uniqid('', true);
-
         return new static($id, $name);
     }
 
     /**
      * Retrieves the ID
      */
-    public function id(): string
+    public function id(): int
     {
         return $this->id;
     }
@@ -49,5 +66,41 @@ class Patient
     public function name(): string
     {
         return $this->name;
+    }
+
+    /**
+     * Retrieves the medications
+     */
+    public function medications(): Collection
+    {
+        return $this->medications;
+    }
+
+    /**
+     * Adds medication
+     */
+    public function addMedication(Medication $medication): void
+    {
+        if (!$this->medications->contains($medication)) {
+            $this->medications->add($medication);
+        }
+    }
+
+    /**
+     * Retrieves the diseases
+     */
+    public function diseases(): Collection
+    {
+        return $this->diseases;
+    }
+
+    /**
+     * Adds disease
+     */
+    public function addDisease(Disease $disease): void
+    {
+        if (!$this->diseases->contains($disease)) {
+            $this->diseases->add($disease);
+        }
     }
 }

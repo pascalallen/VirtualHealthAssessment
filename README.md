@@ -17,6 +17,10 @@ Technical assessment for VirtualHealth
 
 $ `cd <projects-parent-directory> && git clone https://github.com/pascalallen/VirtualHealthAssessment.git`
 
+### Add Entry to `/etc/hosts` File
+
+$ `127.0.0.1       virtualhealth.test`
+
 ### Create Environment file
 
 $ `cp .env.example .env`
@@ -75,4 +79,7 @@ $ `bin/phpunit`
 
 ### VirtualHealth Technical Assessment Setup Instructions
 
-1. TODO
+1. Follow steps in README instructions to setup environment
+2. Unzip SQL file `gzip -d db.sql.gz`
+3. Run database migrations 
+4. Go to `http://virtualhealth.test/api/patients/medications?minimum_count=500` in browser to view patient medications count

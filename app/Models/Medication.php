@@ -13,7 +13,7 @@ class Medication
      * Constructs Medication
      */
     public function __construct(
-        protected string $patientId,
+        protected int $patientId,
         protected string $nationalDrugCode
     ) {
     }
@@ -21,7 +21,7 @@ class Medication
     /**
      * Retrieves the patient ID
      */
-    public function patientId(): string
+    public function patientId(): int
     {
         return $this->patientId;
     }
