@@ -38,15 +38,6 @@ services:
     networks:
       - virtualhealth
 
-  worker:
-    build:
-      context: ./etc/worker
-    container_name: virtualhealth-worker
-    volumes:
-      - .:/var/www/app:cached
-    networks:
-      - virtualhealth
-
 networks:
   virtualhealth:
     driver: bridge
